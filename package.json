@@ -1,6 +1,6 @@
 {
   "name": "@maxlim/autoyear",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component that automatically renders the current year - perfect for copyright footers",
   "main": "dist/autoyear.cjs.js",
   "module": "dist/autoyear.es.js",
