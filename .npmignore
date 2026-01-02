@@ -1,0 +1,12 @@
+# Source files
+src/
+
+# Config files
+tsconfig.json
+vite.config.ts
+
+# Dev files
+node_modules/
+.git/
+.gitignore
+*.log
