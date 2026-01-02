@@ -78,6 +78,29 @@ import { AutoYear, Copyright } from 'autoyear';
 />
 ```
 
+### Using Hooks
+
+For more control over rendering, use the hooks directly:
+
+```tsx
+import { useAutoYear, useCopyright } from "autoyear";
+
+function Footer() {
+  const year = useAutoYear();
+  const copyright = useCopyright({ name: "Acme Inc", startYear: 2020 });
+
+  return (
+    <footer>
+      <p>Established {year}</p>
+      <p>{copyright}</p>
+    </footer>
+  );
+}
+// Renders:
+// Established 2026
+// © 2020-2026 Acme Inc
+```
+
 ## API
 
 ### `<AutoYear />`
@@ -100,6 +123,29 @@ import { AutoYear, Copyright } from 'autoyear';
 | `startYear` | `number`                      | -        | Starting year for range (e.g., 2020-2026) |
 | `separator` | `string`                      | `' '`    | Separator between parts                   |
 
+### `useAutoYear()`
+
+Returns the current year as a number.
+
+```tsx
+const year = useAutoYear(); // 2026
+```
+
+### `useCopyright(options?)`
+
+Returns a formatted copyright string.
+
+| Option      | Type     | Default | Description                               |
+| ----------- | -------- | ------- | ----------------------------------------- |
+| `prefix`    | `string` | `'©'`   | Prefix before the year                    |
+| `name`      | `string` | -       | Name after the year                       |
+| `startYear` | `number` | -       | Starting year for range (e.g., 2020-2026) |
+| `separator` | `string` | `' '`   | Separator between parts                   |
+
+```tsx
+const copyright = useCopyright({ name: "Acme Inc" }); // "© 2026 Acme Inc"
+```
+
 ## Why use autoyear?
 
 - **Zero configuration** — Just import and use
@@ -110,4 +156,4 @@ import { AutoYear, Copyright } from 'autoyear';
 
 ## License
 
-MIT © Max Limsukhawat
+MIT © [Max Limsukhawat](https://maxlim.xyz/)

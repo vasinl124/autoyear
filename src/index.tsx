@@ -97,5 +97,70 @@ export function Copyright({
   return React.createElement(Component, { className, style }, text);
 }
 
+/**
+ * Options for the useCopyright hook
+ */
+export interface UseCopyrightOptions {
+  /**
+   * The copyright symbol or prefix. Defaults to '©'.
+   */
+  prefix?: string;
+  /**
+   * The name to display after the year (e.g., company or person name)
+   */
+  name?: string;
+  /**
+   * Optional starting year for range display (e.g., "2020-2026")
+   */
+  startYear?: number;
+  /**
+   * Separator between prefix, year, and name. Defaults to ' '.
+   */
+  separator?: string;
+}
+
+/**
+ * A hook that returns the current year as a number.
+ * Useful when you need the year value for custom rendering.
+ *
+ * @example
+ * ```tsx
+ * const year = useAutoYear();
+ * // Returns: 2026
+ *
+ * return <span>Established {year}</span>;
+ * ```
+ */
+export function useAutoYear(): number {
+  return new Date().getFullYear();
+}
+
+/**
+ * A hook that returns a formatted copyright string.
+ * Useful when you need the copyright text for custom rendering.
+ *
+ * @example
+ * ```tsx
+ * const copyright = useCopyright({ name: "Acme Inc" });
+ * // Returns: "© 2026 Acme Inc"
+ *
+ * const withRange = useCopyright({ name: "Acme Inc", startYear: 2020 });
+ * // Returns: "© 2020-2026 Acme Inc"
+ * ```
+ */
+export function useCopyright(options: UseCopyrightOptions = {}): string {
+  const { prefix = "©", name, startYear, separator = " " } = options;
+
+  const currentYear = new Date().getFullYear();
+
+  const yearDisplay =
+    startYear && startYear < currentYear
+      ? `${startYear}-${currentYear}`
+      : currentYear.toString();
+
+  const parts = [prefix, yearDisplay, name].filter(Boolean);
+  return parts.join(separator);
+}
+
 // Default export for convenience
 export default AutoYear;
